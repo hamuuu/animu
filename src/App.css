@@ -67,6 +67,11 @@ a.dropdown-toggle.nav-link {
   font-size: 0.6em;
 }
 
+.fb-page,
+.fb-page span,
+.fb-page span iframe[style] {
+    width: 100% !important;
+}
 
 .container {
   background-color: #fff;
