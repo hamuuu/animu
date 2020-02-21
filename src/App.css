@@ -73,6 +73,11 @@ a.dropdown-toggle.nav-link {
     width: 100% !important;
 }
 
+.breadcrumb {
+  background-color: pink !important;
+  font-size: 0.7em;
+}
+
 .container {
   background-color: #fff;
   min-height: 30vh;
@@ -93,7 +98,7 @@ a.dropdown-toggle.nav-link {
 }
 
 .link-container {
-  width: 35%;
+  width: 100%;
 }
 
 .card-body {
