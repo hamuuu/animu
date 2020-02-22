@@ -29,7 +29,6 @@ function App() {
                 <Route path="/:type/:name/:id" exact component={AnimeInfo} />
                 <Route path="/admin" exact component={Admin} />
                 <Route path="/search/:id" exact component={AnimeSearch} />
-                <Route component={Home} />
                 { (localStorage.getItem('appState')) ?
                   <>
                   <Route path="/new-anime" exact component={NewAnime} />
@@ -39,6 +38,7 @@ function App() {
                   </>
                 : ''
                 }
+                <Route component={Home} />
 
               </Switch>
             </div>

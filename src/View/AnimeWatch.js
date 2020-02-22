@@ -27,6 +27,8 @@ class AnimeWatch extends React.Component {
   }
 
   render() {
+    console.log('http://localhost:8000/api/'+this.props.match.params.type+'/'+this.props.match.params.id+'/'+this.props.match.params.episode);
+    console.log(this.state.data);
     return (
       <div>
         <SearchBar />
@@ -34,7 +36,7 @@ class AnimeWatch extends React.Component {
           {
 
             this.state.isLoaded ?
-            <AnimePlayer title={this.state.data[1].title} data={this.props.match.params} dataEpisode={this.state.data[0][this.props.match.params.episode-1]} />
+            <AnimePlayer title={this.state.data[1].title} data={this.props.match.params} dataEpisode={this.state.data[0]} />
             :
             <div className="d-flex justify-content-center align-items-center" style={{height:'100px'}}>
               <ReactLoading type={'spin'} color={'gray'} height={'8%'} width={'8%'} />

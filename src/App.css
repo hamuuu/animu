@@ -84,6 +84,12 @@ a.dropdown-toggle.nav-link {
   border-radius: 5px;
 }
 
+.container.container-player {
+  background-color: #fff;
+  min-height: 70vh;
+  border-radius: 5px;
+}
+
 .side-bar{
   height: 20vh;
 }
