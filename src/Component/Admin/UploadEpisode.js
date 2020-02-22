@@ -78,9 +78,11 @@ class UploadEpisode extends React.Component {
 
   handleRemoveLink = (e, i) => {
     e.preventDefault()
-     let link = [...this.state.linkStreams];
-     link.splice(i,1);
-     this.setState({ linkStreams : link });
+    const { name } = e.target
+    console.log(i);
+    let link = [...this.state[name]];
+    link.splice(i,1);
+    this.setState({ [name] : link });
   }
 
 
@@ -193,7 +195,7 @@ class UploadEpisode extends React.Component {
                   </div>
                 </div>
                 <div>
-                  <button name="linkStreams" className="btn btn-danger" onClick={this.handleRemoveLink}>-</button>
+                  <button name="linkStreams" className="btn btn-danger" onClick={(e) => this.handleRemoveLink(e, index)}>-</button>
                 </div>
               </FormGroup>
             )}
@@ -230,7 +232,7 @@ class UploadEpisode extends React.Component {
                   </div>
                 </div>
                 <div>
-                  <button name="link360" className="btn btn-danger" onClick={this.handleRemoveLink}>-</button>
+                  <button name="link360" className="btn btn-danger" onClick={(e) => this.handleRemoveLink(e, index)}>-</button>
                 </div>
               </FormGroup>
             )}
@@ -267,7 +269,7 @@ class UploadEpisode extends React.Component {
                   </div>
                 </div>
                 <div>
-                  <button name="link480" className="btn btn-danger" onClick={this.handleRemoveLink}>-</button>
+                  <button name="link480" className="btn btn-danger" onClick={(e) => this.handleRemoveLink(e, index)}>-</button>
                 </div>
               </FormGroup>
             )}
@@ -304,7 +306,7 @@ class UploadEpisode extends React.Component {
                   </div>
                 </div>
                 <div>
-                  <button name="link720" className="btn btn-danger" onClick={this.handleRemoveLink}>-</button>
+                  <button name="link720" className="btn btn-danger" onClick={(e) => this.handleRemoveLink(e, index)}>-</button>
                 </div>
               </FormGroup>
             )}

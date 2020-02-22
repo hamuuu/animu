@@ -34,16 +34,15 @@ class AnimePlayer extends React.Component {
   }
 
   changeStreamUrl = (link) => {
-    console.log(link);
     this.setState({
       videoUrl : link
     });
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
-
         <div className="breadcrumb d-flex align-items-center">
           <Link to="/">
             Home
@@ -68,23 +67,40 @@ class AnimePlayer extends React.Component {
         <p className="text-muted px-3" style={{fontSize: '0.7rem'}}><GoCalendar /> <TimeAgo datetime={this.props.dataEpisode.created_at} locale='jk_ID'/></p>
         <hr/>
 
-        <div className="row justify-content-center px-2 pb-5">
+        <div className="row justify-content-center px-2">
           <div className="react-player col-12 col-md-7 px-3">
             {this.state.videoUrl === '/video_not_found.png' ?
               <img src={this.state.videoUrl} alt="Video Not Found" style={{width: '100%', height: '100%', border:'none', overflow: 'hidden'}}/>
               :
-              <video controls src={this.state.videoUrl}  style={{width: '100%', height: '100%', border:'none', overflow: 'hidden'}} />
+              <div>
+                <video controls src={this.state.videoUrl}  style={{width: '100%', height: '100%', border:'none', overflow: 'hidden'}} />
+                <div className="d-flex col-md-7">
+                  {this.state.data.map((items, key) =>
+                    <button onClick = {() => this.changeStreamUrl(items.link)}
+                      className={this.state.videoUrl === items.link ? "bg-info btn m-1 p-2 text-dark font-weight-bold" : "bg-light btn m-1 p-2 text-dark" }
+                      key={items.id}
+                      style={{fontSize:'0.7rem'}}
+                      >
+                      {items.hosting}
+                    </button>
+                  )}
+                </div>
+              </div>
             }
-            <div className="d-flex justify-content-center">
-              {this.state.data.map((items, key) =>
-                <button onClick = {() => this.changeStreamUrl(items.link)} className="bg-light btn m-1 p-2 text-dark font-weight-bold" key={items.id} style={{fontSize:'0.7rem'}}>{items.hosting}</button>
-              )}
-            </div>
           </div>
-          <div className="col-10 mt-5 col-md-5">
+          <div className="col-12 mt-5 col-md-5 mb-3">
             <LinkAnime animeId = {this.props.dataEpisode.anime_id} episodeId = {this.props.dataEpisode.id} />
           </div>
         </div>
+        <div className="row justify-content-center pb-3">
+          <Link to={'/' + this.props.data.type + '/' + this.props.data.name + '/' + this.props.data.id + '/' + (this.props.data.episode - 1)}>
+            <div className="p-2 m-2"><button name="prev" className="bg-dark text-light btn">« Prev Episode</button></div>
+          </Link>
+          <Link to={'/' + this.props.data.type + '/' + this.props.data.name + '/' + this.props.data.id + '/' + (this.props.data.episode + 1)}>
+            <div className="p-2 m-2"><button name="next" className="bg-dark text-light btn">Next Episode »</button></div>
+          </Link>
+        </div>
+
       </div>
     );
   }
