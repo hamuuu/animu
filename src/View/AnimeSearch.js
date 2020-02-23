@@ -14,7 +14,7 @@ class AnimeSearch extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8000/api/search/'+this.props.match.params.id+'/no')
+    axios.get(window.url_api + 'search/'+this.props.match.params.id+'/no')
       .then(res => {
         this.setState({
           isLoaded : true,

@@ -78,7 +78,7 @@ class UpdateAnime extends React.Component {
     formData.append('imageUrl', this.state.imageUrl)
     formData.append('videoUrl', this.state.videoUrl)
     formData.append('duration', this.state.duration)
-    axios.post('http://localhost:8000/api/update-anime', formData,
+    axios.post(window.url_api + 'update-anime', formData,
       {
         headers: {
                 'Content-Type':'multipart/form-data',
@@ -96,7 +96,7 @@ class UpdateAnime extends React.Component {
 
   search = async (val) => {
 
-    const res = await axios('http://localhost:8000/api/search/'+val+'/no')
+    const res = await axios(window.url_api + 'search/'+val+'/no')
     const list = await res.data;
     this.setState({
       data : list,

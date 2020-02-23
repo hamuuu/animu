@@ -20,7 +20,7 @@ class AnimeList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:8000/api/anime/list/movie`)
+    axios.get(window.url_api + `anime/list/movie`)
       .then(res => {
         this.setState({
           isLoaded : true,
@@ -43,7 +43,7 @@ class AnimeList extends React.Component {
     });
 
     if (!this.state.mode) {
-      axios.get(`http://localhost:8000/api/movie/pagination`)
+      axios.get(window.url_api + `movie/pagination`)
         .then(res => {
           this.setState({
             isLoaded : true,
@@ -51,7 +51,7 @@ class AnimeList extends React.Component {
           });
         })
     } else {
-      axios.get(`http://localhost:8000/api/anime/list/movie`)
+      axios.get(window.url_api + `anime/list/movie`)
         .then(res => {
           this.setState({
             isLoaded : true,
@@ -69,7 +69,7 @@ class AnimeList extends React.Component {
       isLoaded: false
     });
 
-    axios.get(`http://localhost:8000/api/movie/pagination?page=`+number)
+    axios.get(window.url_api + `movie/pagination?page=`+number)
       .then(res => {
         this.setState({
           isLoaded : true,

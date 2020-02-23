@@ -16,6 +16,8 @@ import UpdateAnime from './Component/Admin/UpdateAnime';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 
 function App() {
+  window.url_api = 'http://localhost:8000/api/'
+
   return (
     <div>
       <Router>

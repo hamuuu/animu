@@ -16,7 +16,7 @@ class NewEpisodeList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:8000/api/episode`)
+    axios.get(window.url_api + `episode`)
       .then(res => {
         this.setState({
           isLoaded : true,
@@ -43,7 +43,12 @@ class NewEpisodeList extends React.Component {
             <ReactLoading className="mt-4 mx-auto" type={'spin'} color={'gray'} height={'8%'} width={'8%'} />
           }
         </div>
-        {this.state.isLoaded ? <Pagination currentPage = {this.state.currentPage} totalPost = {this.state.data.length} paginate = {this.paginate} postPerPage = {this.state.dataPerPage} />
+        {this.state.isLoaded ?
+          <Pagination currentPage = {this.state.currentPage}
+                      totalPost = {this.state.data.length}
+                      paginate = {this.paginate}
+                      postPerPage = {this.state.dataPerPage}
+                       />
           : ''
         }
       </div>

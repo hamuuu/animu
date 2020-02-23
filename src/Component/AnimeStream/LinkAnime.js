@@ -9,8 +9,14 @@ class LinkAnime extends React.Component {
     }
   }
 
-  componentDidMount() {
-    fetch('http://localhost:8000/api/episode/link/'+this.props.animeId+'/'+this.props.episodeId)
+  componentDidUpdate(prevProps) {
+    if (prevProps.episodeId !== this.props.episodeId) {
+        this.getData(this.props.animeId, this.props.episodeId)
+    }
+  }
+
+  getData = (id, episode_id) => {
+    fetch(window.url_api + 'episode/link/'+id+'/'+episode_id)
       .then( res => {
         if(res.status === 200)
            return res.json()
@@ -23,26 +29,42 @@ class LinkAnime extends React.Component {
      })
   }
 
+  componentDidMount() {
+    this.getData(this.props.animeId, this.props.episodeId)
+  }
+
   render() {
     return (
       <div className="link-container">
-        <p className="p-2 title-anime-watch-detail bg-info border-bottom" style={{marginBottom: 0}}>Link Download</p>
+        <p className="p-2 bg-dark font-weight-bold text-light border-bottom" style={{marginBottom: 0}}>Link Download</p>
         <div className="border">
+
           <div className="d-flex p-2 font-weight-bold">
-            <p style={{width: '50%'}}>720p</p>
-            { this.state.isLoaded ? this.state.data[0].map((items, index) => <div className="mx-2 text-break" key={items.id}><a href={items.link}>{items.hosting}</a></div> )
+            <div className="border-right border-dark col-3">720p</div>
+            { this.state.isLoaded ? this.state.data[0].map((items, index) =>
+              <div className="mx-2 text-break col-3" key={items.id}>
+                <a href={items.link}>{items.hosting}</a>
+              </div> )
               : ''
             }
           </div>
+
           <div className="d-flex p-2 font-weight-bold">
-            <p style={{width: '50%'}}>480p</p>
-            { this.state.isLoaded ? this.state.data[1].map((items, index) => <div className="mx-2 text-break" key={items.id}><a href={items.link}>{items.hosting}</a></div> )
+            <div className="border-right border-dark col-3">480p</div>
+            { this.state.isLoaded ? this.state.data[1].map((items, index) =>
+              <div className="mx-2 text-break col-3" key={items.id}>
+                <a href={items.link}>{items.hosting}</a>
+              </div> )
             : ''
             }
           </div>
+
           <div className="d-flex p-2 font-weight-bold">
-            <p style={{width: '50%'}}>360p</p>
-            { this.state.isLoaded ? this.state.data[2].map((items, index) => <div className="mx-2 text-break" key={items.id}><a href={items.link}>{items.hosting}</a></div> )
+            <div className="border-right border-dark col-3">360p</div>
+            { this.state.isLoaded ? this.state.data[2].map((items, index) =>
+              <div className="mx-2 text-break col-3" key={items.id}>
+                <a href={items.link}>{items.hosting}</a>
+              </div> )
             : ''
             }
           </div>

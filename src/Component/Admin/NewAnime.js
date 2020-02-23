@@ -76,7 +76,7 @@ class NewAnime extends React.Component {
     formData.append('imageUrl', this.state.imageUrl)
     formData.append('videoUrl', this.state.videoUrl)
     formData.append('duration', this.state.duration)
-    axios.post('http://localhost:8000/api/post-anime', formData,
+    axios.post(window.url_api + 'post-anime', formData,
       {
         headers: {
                 'Content-Type':'multipart/form-data',

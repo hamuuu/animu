@@ -27,7 +27,7 @@ class LoginAdmin extends React.Component {
     formData.append("username", username);
     formData.append("password", password);
     axios
-      .post("http://localhost:8000/api/user/login/", formData)
+      .post(window.url_api + "user/login/", formData)
       .then(response => {
         return response;
       })

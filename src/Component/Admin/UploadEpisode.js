@@ -88,7 +88,7 @@ class UploadEpisode extends React.Component {
 
   search = async (val) => {
 
-    const res = await axios('http://localhost:8000/api/search/'+val+'/no')
+    const res = await axios(window.url_api + 'search/'+val+'/no')
     const list = await res.data;
     this.setState({
       data : list,
@@ -106,7 +106,7 @@ class UploadEpisode extends React.Component {
     formData.append('link720', JSON.stringify(this.state.link720))
     formData.append('thumbnail', this.state.thumbnail)
 
-    axios.post('http://localhost:8000/api/post-episode', formData,
+    axios.post(window.url_api + 'post-episode', formData,
       {
         headers: {
                 'Content-Type':'multipart/form-data',

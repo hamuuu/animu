@@ -38,7 +38,7 @@ class SearchBar extends React.Component {
       isLoaded : true
     });
 
-    const res = await axios('http://localhost:8000/api/search/'+val+'/yes')
+    const res = await axios(window.url_api + 'search/'+val+'/yes')
     const list = await res.data;
     this.setState({
       data : list,

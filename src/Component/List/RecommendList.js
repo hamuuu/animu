@@ -16,7 +16,7 @@ class RecommendList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:8000/api/anime`)
+    axios.get(window.url_api + `anime`)
       .then(res => {
         this.setState({
           isLoaded : true,

@@ -37,7 +37,7 @@ class AnimeInfo extends Component {
 
 
   getData = (id) => {
-      axios.get('http://localhost:8000/api/anime/'+id)
+      axios.get(window.url_api + 'anime/'+id)
         .then(res => {
           this.setState({
             isLoadedDetail : true,
@@ -45,7 +45,7 @@ class AnimeInfo extends Component {
           });
         })
 
-      axios.get('http://localhost:8000/api/episode/'+id)
+      axios.get(window.url_api + 'episode/'+id)
         .then(res => {
           this.setState({
             isLoadedEpisode : true,
