@@ -8,7 +8,7 @@ import ChatBar from '../Component/SideMenu/ChatBar';
 
 function Home() {
   return (
-    <div>
+    <div className="mb-5">
       <div className=" col-12 col-md-12">
         <SearchBar />
       </div>

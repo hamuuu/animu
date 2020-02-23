@@ -75,7 +75,7 @@ a.dropdown-toggle.nav-link {
 
 .breadcrumb {
   background-color: pink !important;
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 
 .container {
@@ -214,13 +214,6 @@ a.dropdown-toggle.nav-link {
   margin: auto;
 }
 
-ol.breadcrumb {
-  background-color: rgb(251, 149, 167);
-}
-
-li.breadcrumb-item {
-  font-size: 0.8rem !important;
-}
 
 .sub-anime-detail {
   -webkit-text-fill-color: rgb(213, 63, 63);
