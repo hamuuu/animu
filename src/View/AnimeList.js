@@ -6,6 +6,7 @@ import SearchBar from '../Component/SearchMenu/SearchBar';
 import AnimeCard from '../Component/Card/AnimeCard';
 import {FaRegImage} from 'react-icons/fa';
 import {GoTextSize} from 'react-icons/go';
+import Pagination from '../Component/Pagination';
 
 class AnimeList extends React.Component {
   constructor() {
@@ -13,7 +14,8 @@ class AnimeList extends React.Component {
     this.state = {
       data : [],
       isLoaded : false,
-      mode: false //false text mode, true image mode
+      mode: false, //false text mode, true image mode
+      currentPage: 1
     }
   }
 
@@ -37,16 +39,55 @@ class AnimeList extends React.Component {
 
   changeMode = () => {
     this.setState({
+      isLoaded: false
+    });
+
+    if (!this.state.mode) {
+      axios.get(`http://localhost:8000/api/anime/pagination`)
+        .then(res => {
+          this.setState({
+            isLoaded : true,
+            data : res.data
+          });
+        })
+    } else {
+      axios.get(`http://localhost:8000/api/anime/list/tv`)
+        .then(res => {
+          this.setState({
+            isLoaded : true,
+            data : res.data
+          });
+        })
+    }
+    this.setState({
       mode : !this.state.mode
     });
   }
+
+  paginate = (number) => {
+    this.setState({
+      isLoaded: false
+    });
+
+    axios.get(`http://localhost:8000/api/anime/pagination?page=`+number)
+      .then(res => {
+        this.setState({
+          isLoaded : true,
+          data : res.data
+        });
+      })
+
+    this.setState({
+      currentPage : number
+    })
+  };
 
   render() {
     console.log(this.state.data);
     return (
       <div className="py-3">
         <SearchBar />
-        <div className="container">
+        <div className="container"  id="new-episode">
           <div className="row justify-content-around border-bottom align-items-center">
             <h5 className="pt-3 px-3 col-6 recommend-title mb-3 text-info">Daftar Anime</h5>
             <div className="col-6 py-3 text-right">
@@ -81,12 +122,19 @@ class AnimeList extends React.Component {
           }
           {this.state.isLoaded ?
                 this.state.mode ?
-                  <div className="row col-12">
-                    {this.state.data[1].map((item, index) =>
-                      <div className="col-md-2 p-0 col-6">
-                        <AnimeCard data = {item} />
-                      </div>
-                    )}
+                  <div>
+                    <div className="row mx-auto p-0 col-12 mt-3">
+                      {this.state.data.data.map((item, index) =>
+                        <div key={index} className="col-md-2 p-0 col-6">
+                          <AnimeCard data = {item} />
+                        </div>
+                      )}
+                    </div>
+                    <Pagination currentPage = {this.state.data.current_page}
+                                totalPost = {this.state.data.total}
+                                paginate = {this.paginate}
+                                postPerPage = {this.state.data.per_page}
+                                 />
                   </div>
                 :
                 ''
