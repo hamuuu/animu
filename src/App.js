@@ -7,6 +7,7 @@ import AnimeInfo from './View/AnimeInfo'
 import AnimeWatch from './View/AnimeWatch';
 import MovieList from './View/MovieList';
 import AnimeList from './View/AnimeList';
+import AnimeBatch from './View/AnimeBatch';
 import AnimeSearch from './View/AnimeSearch';
 import Admin from './View/Admin';
 import NewAnime from './Component/Admin/NewAnime';
@@ -27,20 +28,22 @@ function App() {
                 <Route path="/" exact component={Home} />
                 <Route path="/movie" exact component={MovieList} />
                 <Route path="/anime" exact component={AnimeList} />
+                <Route path="/anime-batch" exact component={AnimeBatch} />
                 <Route path="/:type/:name/:id/:episode" exact component={AnimeWatch} />
                 <Route path="/:type/:name/:id" exact component={AnimeInfo} />
                 <Route path="/admin" exact component={Admin} />
                 <Route path="/search/:id" exact component={AnimeSearch} />
                 { (localStorage.getItem('appState')) ?
                   <>
-                  <Route path="/new-anime" exact component={NewAnime} />
-                  <Route path="/upload-episode" exact component={UploadEpisode} />
-                  <Route path="/update-anime" exact component={UpdateAnime} />
-                  <Route path="/update-episode" exact component={UpdateEpisode} />
+                    <Route path="/new-anime" exact component={NewAnime} />
+                    <Route path="/upload-episode" exact component={UploadEpisode} />
+                    <Route path="/update-anime" exact component={UpdateAnime} />
+                    <Route path="/update-episode" exact component={UpdateEpisode} />
+                    <Route component={Home} />
                   </>
-                : ''
+                :
+                  <Route component={Home} />
                 }
-                <Route component={Home} />
 
               </Switch>
             </div>

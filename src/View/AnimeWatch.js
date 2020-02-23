@@ -34,7 +34,7 @@ class AnimeWatch extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.episode !== prevProps.match.params.episode) {
-      this.getData(this.props.match.params.type, this.props.match.params.id, this.state.data[0].episode)
+      this.getData(this.props.match.params.type, this.props.match.params.id, this.props.match.params.episode)
     }
   }
 
