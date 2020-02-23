@@ -83,7 +83,6 @@ class AnimeList extends React.Component {
   };
 
   render() {
-    console.log(this.state.data);
     return (
       <div className="py-3">
         <SearchBar />
@@ -106,7 +105,7 @@ class AnimeList extends React.Component {
               Object.keys(this.state.data[0]).map((item, index) =>
                 <div key={index}>
                   <p className="sub-anime-detail ml-2 my-2" style={{margin: 0}}>{item}</p>
-                  <li className="row m-1 border p-3">
+                  <li className="row m-1">
                     {this.state.data[0][item].map((anime, index) =>
                       <div key={index} className="col-md-6 col-12 py-2">
                           <Link to={this.generatePath(anime.type, anime.title, anime.id)} style={{textDecoration: 'none'}}>
@@ -130,11 +129,12 @@ class AnimeList extends React.Component {
                         </div>
                       )}
                     </div>
+
                     <Pagination currentPage = {this.state.data.current_page}
                                 totalPost = {this.state.data.total}
                                 paginate = {this.paginate}
                                 postPerPage = {this.state.data.per_page}
-                                 />
+                    />
                   </div>
                 :
                 ''
