@@ -100,7 +100,7 @@ class NewAnime extends React.Component {
           <h5 className="recommend-title text-info">Tambahkan Anime Baru</h5>
           <Back />
         </div>
-        <Form onSubmit={this.handleSubmit} className="p-3 my-3 mx-auto" style={{width: '30vw'}} >
+        <Form onSubmit={this.handleSubmit} className="p-3 col-md-6 col-11 my-3 mx-auto">
           <FormGroup>
               <div className="d-flex">
                 <Input
@@ -114,7 +114,7 @@ class NewAnime extends React.Component {
               </div>
           </FormGroup>
           <FormGroup>
-              <div className="d-flex">
+              <div >
                 <Input
                   type="text"
                   name="titleRomaji"
@@ -125,7 +125,7 @@ class NewAnime extends React.Component {
               </div>
           </FormGroup>
           <FormGroup>
-              <div className="d-flex">
+              <div >
                 <Input
                   type="text"
                   name="titleJapanese"
@@ -136,7 +136,7 @@ class NewAnime extends React.Component {
               </div>
           </FormGroup>
           <FormGroup>
-              <div className="d-flex">
+              <div >
                 <Input
                   type="text"
                   name="status"
@@ -147,7 +147,7 @@ class NewAnime extends React.Component {
               </div>
           </FormGroup>
           <FormGroup>
-              <div className="d-flex">
+              <div >
                 <Input
                   type="text"
                   name="genre"
@@ -158,7 +158,7 @@ class NewAnime extends React.Component {
               </div>
           </FormGroup>
           <FormGroup>
-              <div className="d-flex">
+              <div >
                 <Input
                   type="text"
                   name="rating"
@@ -169,7 +169,7 @@ class NewAnime extends React.Component {
               </div>
           </FormGroup>
           <FormGroup>
-              <div className="d-flex">
+              <div >
                 <Input
                   type="text"
                   name="type"
@@ -180,7 +180,7 @@ class NewAnime extends React.Component {
               </div>
           </FormGroup>
           <FormGroup>
-              <div className="d-flex">
+              <div >
                 <Input
                   type="text"
                   name="episode"
@@ -191,7 +191,7 @@ class NewAnime extends React.Component {
               </div>
           </FormGroup>
           <FormGroup>
-              <div className="d-flex">
+              <div >
                 <Input
                   type="text"
                   name="releaseDate"
@@ -202,7 +202,7 @@ class NewAnime extends React.Component {
               </div>
           </FormGroup>
           <FormGroup>
-              <div className="d-flex">
+              <div >
                 <Input
                   type="text"
                   name="studio"
@@ -213,7 +213,7 @@ class NewAnime extends React.Component {
               </div>
           </FormGroup>
           <FormGroup>
-              <div className="d-flex">
+              <div >
                 <Input
                   type="text"
                   name="score"
@@ -224,7 +224,7 @@ class NewAnime extends React.Component {
               </div>
           </FormGroup>
           <FormGroup>
-              <div className="d-flex">
+              <div >
                 <Input
                   type="textarea"
                   name="sinopsis"
@@ -235,7 +235,7 @@ class NewAnime extends React.Component {
               </div>
           </FormGroup>
           <FormGroup>
-              <div className="d-flex">
+              <div >
                 <Input
                   type="text"
                   name="videoUrl"
@@ -246,7 +246,7 @@ class NewAnime extends React.Component {
               </div>
           </FormGroup>
           <FormGroup>
-              <div className="d-flex">
+              <div >
                 <Input
                   type="text"
                   name="imageUrl"

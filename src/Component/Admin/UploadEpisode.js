@@ -19,7 +19,8 @@ class UploadEpisode extends React.Component {
       link720: [],
       link480: [],
       link360: [],
-      thumbnail: ''
+      thumbnail: '',
+      thumbnailPreview: null
     }
   }
 
@@ -35,9 +36,12 @@ class UploadEpisode extends React.Component {
     }
     if (e.target.name === 'thumbnail') {
       let files = e.target.files || e.dataTransfer.files
-      if(!files.length)
-        return
-      this.createImage(files[0])
+      if(e.target.files && e.target.files[0]){
+        this.setState({
+          thumbnailPreview: URL.createObjectURL(e.target.files[0])
+        });
+        return this.createImage(files[0])
+      }
     }
   }
 
@@ -79,7 +83,6 @@ class UploadEpisode extends React.Component {
   handleRemoveLink = (e, i) => {
     e.preventDefault()
     const { name } = e.target
-    console.log(i);
     let link = [...this.state[name]];
     link.splice(i,1);
     this.setState({ [name] : link });
@@ -126,10 +129,10 @@ class UploadEpisode extends React.Component {
     return (
       <div className="container my-3">
         <div className="p-3 d-flex align-items-center justify-content-between border-bottom">
-          <h5 className="recommend-titletext-info">Post Episode Baru</h5>
+          <h5 className="recommend-title text-info">Post Episode Baru</h5>
           <Back />
         </div>
-        <Form onSubmit={this.handleSubmit} className="p-3 my-3 mx-auto" style={{width: '30vw'}} >
+        <Form onSubmit={this.handleSubmit} className="p-3 my-3 col-md-6 col-11 mx-auto">
           <FormGroup>
               <label>Judul Anime</label>
               <div style={{position: 'relative'}}>
@@ -313,6 +316,10 @@ class UploadEpisode extends React.Component {
           </div>
           <FormGroup>
             <Input name='thumbnail' type="file" onChange={this.handleChange} />
+              { this.state.thumbnailPreview !== null ?
+                <img src={this.state.thumbnailPreview} alt="thumbnail" className="img-fluid pt-3"/>
+                :
+                '' }
             <FormText color="muted">
               aplod thumbnail video nya disini
             </FormText>

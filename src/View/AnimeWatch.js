@@ -67,7 +67,6 @@ class AnimeWatch extends React.Component {
   }
 
   render() {
-    console.log(this.state.data[0]);
     return (
       <div>
         <SearchBar />
@@ -89,7 +88,7 @@ class AnimeWatch extends React.Component {
               }
             </div>
             <div className="container mt-3" style={{padding:0}}>
-              {this.state.isLoadedEpisode ?
+              {this.state.isLoadedEpisode && this.state.isLoaded ?
                 <EpisodeList data={this.state.dataEpisode}
                   id={this.props.match.params.id}
                   uri={this.props.match.params.name}

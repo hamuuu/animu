@@ -85,7 +85,20 @@ class AnimePlayer extends React.Component {
               <img src={this.state.videoUrl} alt="Video Not Found" style={{width: '100%', height: '100%', border:'none', overflow: 'hidden'}}/>
               :
               <div>
-                <video controls src={this.state.videoUrl}  style={{width: '100%', height: '100%', border:'none', overflow: 'hidden'}} />
+                <div className="col-12">
+                  <div className="embed-responsive embed-responsive-16by9">
+                    <iframe className="embed-responsive-item"
+                        src={this.state.videoUrl}
+                        allowFullScreen
+                        title={this.props.title}
+                        frameBorder={0}
+                        autoPlay={false}
+                        style={{overflow: 'hidden'}}
+                        >
+                    </iframe>
+                  </div>
+
+                </div>
                 <div className="d-flex justify-content-center pt-2 col-12">
                   {this.state.data.map((items, key) =>
                     <button onClick = {() => this.changeStreamUrl(items.link)}

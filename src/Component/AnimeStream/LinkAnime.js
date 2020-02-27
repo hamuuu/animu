@@ -41,32 +41,38 @@ class LinkAnime extends React.Component {
 
           <div className="d-flex p-2 font-weight-bold">
             <div className="border-right border-dark col-3">720p</div>
-            { this.state.isLoaded ? this.state.data[0].map((items, index) =>
-              <div className="mx-2 text-break col-3" key={items.id}>
-                <a href={items.link}>{items.hosting}</a>
-              </div> )
-              : ''
-            }
+            <div className="d-flex flex-wrap col-9 justify-content-center">
+              { this.state.isLoaded ? this.state.data[0].map((items, index) =>
+                <div className="mx-2 text-break" key={items.id}>
+                  <a href={items.link}>{items.hosting}</a>
+                </div> )
+                : ''
+              }
+            </div>
           </div>
 
           <div className="d-flex p-2 font-weight-bold">
             <div className="border-right border-dark col-3">480p</div>
-            { this.state.isLoaded ? this.state.data[1].map((items, index) =>
-              <div className="mx-2 text-break col-3" key={items.id}>
-                <a href={items.link}>{items.hosting}</a>
-              </div> )
-            : ''
-            }
+              <div className="d-flex flex-wrap col-9 justify-content-center w-100">
+                { this.state.isLoaded ? this.state.data[1].map((items, index) =>
+                  <div className="mx-2 text-break" key={items.id}>
+                    <a href={items.link}>{items.hosting}</a>
+                  </div> )
+                  : ''
+                }
+              </div>
           </div>
 
           <div className="d-flex p-2 font-weight-bold">
             <div className="border-right border-dark col-3">360p</div>
-            { this.state.isLoaded ? this.state.data[2].map((items, index) =>
-              <div className="mx-2 text-break col-3" key={items.id}>
-                <a href={items.link}>{items.hosting}</a>
-              </div> )
-            : ''
-            }
+              <div className="d-flex flex-wrap col-9 justify-content-center w-100">
+                { this.state.isLoaded ? this.state.data[2].map((items, index) =>
+                  <div className="mx-2 text-break" key={items.id}>
+                    <a href={items.link}>{items.hosting}</a>
+                  </div> )
+                  : ''
+                }
+              </div>
           </div>
         </div>
       </div>

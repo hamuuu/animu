@@ -112,7 +112,7 @@ class UpdateAnime extends React.Component {
           <h5 className="recommend-title text-info">Update Detail Anime</h5>
           <Back />
         </div>
-        <Form autoComplete="off" onSubmit={this.handleSubmit} className="p-3 my-3 mx-auto" style={{width: '30vw'}} >
+        <Form autoComplete="off" onSubmit={this.handleSubmit} className="p-3 my-3 mx-auto col-md-6 col-12">
           <FormGroup>
               <div style={{position: 'relative'}}>
                 <Input

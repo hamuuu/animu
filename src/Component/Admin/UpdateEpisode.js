@@ -3,28 +3,35 @@ import { Form, FormGroup, Input, FormText } from 'reactstrap'
 import axios from 'axios'
 import Back from './Back'
 
+const initState = {
+  isLoaded : false,
+  title: '',
+  id: '',
+  episode: '',
+  data: [],
+  isDisplayed: false,
+  linkStreams: [],
+  link720: [],
+  link480: [],
+  link360: [],
+  thumbnail: '',
+  disabled: {
+    pointerEvents:'none',
+    opacity: 0.7
+  }
+}
 
 class UpdateEpisode extends React.Component {
 
   constructor () {
     super()
-    this.state = {
-      isLoaded : false,
-      title: '',
-      id: '',
-      episode: '',
-      data: [],
-      isDisplayed: false,
-      linkStreams: [],
-      link720: [],
-      link480: [],
-      link360: [],
-      thumbnail: '',
-      disabled: {
-        pointerEvents:'none',
-        opacity: 0.7
-      }
-    }
+    this.state = initState
+  }
+
+  resetState(initState) {
+    this.setState({
+      ...initState, title: this.state.title, id: this.state.id, episode: this.state.episode
+    });
   }
 
   handleChange = (e) => {
@@ -33,7 +40,15 @@ class UpdateEpisode extends React.Component {
     });
     if (e.target.name === 'title' && e.target.value !== '') {
       this.setState({
-        isDisplayed: true
+        isDisplayed: true,
+        linkStreams: [],
+        link720: [],
+        link480: [],
+        link360: [],
+        disabled: {
+          pointerEvents:'none',
+          opacity: 0.7
+        }
       });
       this.search(e.target.value)
     }
@@ -82,23 +97,28 @@ class UpdateEpisode extends React.Component {
 
   handleRemoveLink = (e, i) => {
     e.preventDefault()
-     let link = [...this.state.linkStreams];
-     link.splice(i,1);
-     this.setState({ linkStreams : link });
+    const { name } = e.target
+    let link = [...this.state[name]];
+    link.splice(i,1);
+    this.setState({ [name] : link });
   }
 
   checkData = (e) => {
     e.preventDefault()
     axios.get(window.url_api + 'episode/'+this.state.id+'/'+this.state.episode)
       .then(res => {
-        console.log(res.data);
-        this.setState({
-          linkStreams : res.data[0],
-          link360 : res.data[1],
-          link480 : res.data[2],
-          link720 : res.data[3],
-          disabled: {}
-        })
+        if (res.data !== 'Episode doesnt exists') {
+          this.setState({
+            linkStreams : res.data[0],
+            link360 : res.data[1],
+            link480 : res.data[2],
+            link720 : res.data[3],
+            disabled: {}
+          })
+        } else {
+          alert(res.data)
+          this.resetState(initState)
+        }
       })
   }
 
@@ -123,7 +143,7 @@ class UpdateEpisode extends React.Component {
     formData.append('link720', JSON.stringify(this.state.link720))
     formData.append('thumbnail', this.state.thumbnail)
 
-    axios.post(window.url_api + 'post-episode', formData,
+    axios.post(window.url_api + 'update-episode', formData,
       {
         headers: {
                 'Content-Type':'multipart/form-data',
@@ -132,10 +152,12 @@ class UpdateEpisode extends React.Component {
 
   )
       .then(function (response) {
-          alert(response.data)
+          console.log(response.data);
+          // alert(response.data)
       })
       .catch(function (error) {
-          alert('Gagal Input gan.')
+          console.log(error);
+          // alert('Gagal Input gan.')
       });
   }
 
@@ -143,10 +165,10 @@ class UpdateEpisode extends React.Component {
     return (
       <div className="container my-3">
         <div className="p-3 d-flex align-items-center justify-content-between border-bottom">
-          <h5 className="recommend-titletext-info">Update Episode</h5>
+          <h5 className="recommend-title text-info">Update Episode</h5>
           <Back />
         </div>
-        <Form onSubmit={this.handleSubmit} className="p-3 my-3 mx-auto" style={{width: '30vw'}} >
+        <Form onSubmit={this.handleSubmit} className="p-3 my-3 mx-auto col-md-6 col-12">
           <FormGroup>
               <label>Judul Anime</label>
               <div style={{position: 'relative'}}>
@@ -217,7 +239,7 @@ class UpdateEpisode extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <button name="linkStreams" className="btn btn-danger" onClick={this.handleRemoveLink}>-</button>
+                    <button name="linkStreams" className="btn btn-danger" onClick={e => this.handleRemoveLink(e, index)}>-</button>
                   </div>
                 </FormGroup>
               )}
@@ -254,7 +276,7 @@ class UpdateEpisode extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <button name="link360" className="btn btn-danger" onClick={this.handleRemoveLink}>-</button>
+                    <button name="link360" className="btn btn-danger" onClick={e => this.handleRemoveLink(e, index)}>-</button>
                   </div>
                 </FormGroup>
               )}
@@ -291,7 +313,7 @@ class UpdateEpisode extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <button name="link480" className="btn btn-danger" onClick={this.handleRemoveLink}>-</button>
+                    <button name="link480" className="btn btn-danger" onClick={e => this.handleRemoveLink(e, index)}>-</button>
                   </div>
                 </FormGroup>
               )}
@@ -328,7 +350,7 @@ class UpdateEpisode extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <button name="link720" className="btn btn-danger" onClick={this.handleRemoveLink}>-</button>
+                    <button name="link720" className="btn btn-danger" onClick={e => this.handleRemoveLink(e, index)}>-</button>
                   </div>
                 </FormGroup>
               )}

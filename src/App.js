@@ -35,15 +35,18 @@ function App() {
                 <Route path="/search/:id" exact component={AnimeSearch} />
                 { (localStorage.getItem('appState')) ?
                   <>
-                    <Route path="/new-anime" exact component={NewAnime} />
-                    <Route path="/upload-episode" exact component={UploadEpisode} />
-                    <Route path="/update-anime" exact component={UpdateAnime} />
-                    <Route path="/update-episode" exact component={UpdateEpisode} />
-                    <Route component={Home} />
+                    <Switch>
+                      <Route path="/new-anime" exact component={NewAnime} />
+                      <Route path="/upload-episode" exact component={UploadEpisode} />
+                      <Route path="/update-anime" exact component={UpdateAnime} />
+                      <Route path="/update-episode" exact component={UpdateEpisode} />
+                      <Route component={Home} />
+                    </Switch>
                   </>
                 :
                   <Route component={Home} />
                 }
+
 
               </Switch>
             </div>
