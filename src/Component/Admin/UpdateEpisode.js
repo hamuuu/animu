@@ -14,7 +14,10 @@ const initState = {
   link720: [],
   link480: [],
   link360: [],
+  episodeId: '',
   thumbnail: '',
+  thumbnailUndo: '',
+  thumbnailPreview: null,
   disabled: {
     pointerEvents:'none',
     opacity: 0.7
@@ -54,9 +57,12 @@ class UpdateEpisode extends React.Component {
     }
     if (e.target.name === 'thumbnail') {
       let files = e.target.files || e.dataTransfer.files
-      if(!files.length)
-        return
-      this.createImage(files[0])
+      if(e.target.files && e.target.files[0]){
+        this.setState({
+          thumbnailPreview: URL.createObjectURL(e.target.files[0])
+        });
+        return this.createImage(files[0])
+      }
     }
   }
 
@@ -70,6 +76,13 @@ class UpdateEpisode extends React.Component {
     reader.readAsDataURL(file)
   }
 
+  handleUndo = (e) => {
+    e.preventDefault()
+    this.setState({
+      thumbnailPreview: null,
+      thumbnail: this.state.thumbnailUndo
+    });
+  }
 
   handleClick = (items) => {
     this.setState({
@@ -109,10 +122,14 @@ class UpdateEpisode extends React.Component {
       .then(res => {
         if (res.data !== 'Episode doesnt exists') {
           this.setState({
+            thumbnailPreview: null,
             linkStreams : res.data[0],
             link360 : res.data[1],
             link480 : res.data[2],
             link720 : res.data[3],
+            thumbnail : res.data[4],
+            thumbnailUndo : res.data[4],
+            episodeId : res.data[5],
             disabled: {}
           })
         } else {
@@ -142,6 +159,7 @@ class UpdateEpisode extends React.Component {
     formData.append('link480', JSON.stringify(this.state.link480))
     formData.append('link720', JSON.stringify(this.state.link720))
     formData.append('thumbnail', this.state.thumbnail)
+    formData.append('episodeId', this.state.episodeId)
 
     axios.post(window.url_api + 'update-episode', formData,
       {
@@ -152,8 +170,8 @@ class UpdateEpisode extends React.Component {
 
   )
       .then(function (response) {
-          console.log(response.data);
-          // alert(response.data)
+          alert(response.data)
+
       })
       .catch(function (error) {
           console.log(error);
@@ -223,6 +241,7 @@ class UpdateEpisode extends React.Component {
                         value={this.state.linkStreams[index].hosting}
                         onChange={(e) => this.handleChangeLink(e, index)}
                         data-group={'linkStreams'}
+                        required
                         />
                     </div>
                   </div>
@@ -235,6 +254,7 @@ class UpdateEpisode extends React.Component {
                         value={this.state.linkStreams[index].link}
                         onChange={(e) => this.handleChangeLink(e, index)}
                         data-group={'linkStreams'}
+                        required
                         />
                     </div>
                   </div>
@@ -260,6 +280,7 @@ class UpdateEpisode extends React.Component {
                         value={this.state.link360[index].hosting}
                         onChange={(e) => this.handleChangeLink(e, index)}
                         data-group={'link360'}
+                        required
                         />
                     </div>
                   </div>
@@ -272,6 +293,7 @@ class UpdateEpisode extends React.Component {
                         value={this.state.link360[index].link}
                         onChange={(e) => this.handleChangeLink(e, index)}
                         data-group={'link360'}
+                        required
                         />
                     </div>
                   </div>
@@ -297,6 +319,7 @@ class UpdateEpisode extends React.Component {
                         value={this.state.link480[index].hosting}
                         onChange={(e) => this.handleChangeLink(e, index)}
                         data-group={'link480'}
+                        required
                         />
                     </div>
                   </div>
@@ -309,6 +332,7 @@ class UpdateEpisode extends React.Component {
                         value={this.state.link480[index].link}
                         onChange={(e) => this.handleChangeLink(e, index)}
                         data-group={'link480'}
+                        required
                         />
                     </div>
                   </div>
@@ -334,6 +358,7 @@ class UpdateEpisode extends React.Component {
                         value={this.state.link720[index].hosting}
                         onChange={(e) => this.handleChangeLink(e, index)}
                         data-group={'link720'}
+                        required
                         />
                     </div>
                   </div>
@@ -346,6 +371,7 @@ class UpdateEpisode extends React.Component {
                         value={this.state.link720[index].link}
                         onChange={(e) => this.handleChangeLink(e, index)}
                         data-group={'link720'}
+                        required
                         />
                     </div>
                   </div>
@@ -357,6 +383,18 @@ class UpdateEpisode extends React.Component {
             </div>
             <FormGroup>
               <Input name='thumbnail' type="file" onChange={this.handleChange} />
+              {this.state.thumbnail !== '' && this.state.thumbnailPreview === null ?
+                <img src={window.url_image+this.state.thumbnail} className="mt-3" alt=""/>
+                : ''
+              }
+
+              {this.state.thumbnailPreview !== null ?
+                <img src={this.state.thumbnailPreview} className="mt-3" alt=""/>
+                : ''
+              }
+              <div>
+                <button className="btn btn-dark my-2" onClick={this.handleUndo}>Undo</button>
+              </div>
               <FormText color="muted">
                 aplod thumbnail video nya disini
               </FormText>

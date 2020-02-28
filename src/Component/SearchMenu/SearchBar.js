@@ -63,7 +63,7 @@ class SearchBar extends React.Component {
               <div className="active-pink-3 active-pink-4 mb-4 d-flex">
                 <input style={{paddingRight: '20px'}} value={this.state.search} onChange={this.handleChange} className="form-control" type="text" placeholder="Cari disini gan.." aria-label="Search" />
                 <Link to={"/search/"+this.state.search} style={{textDecoration: 'none'}}>
-                  <button className="text-muted" style={{border: 0, backgroundColor: 'transparent', marginLeft: '-35px', paddingBottom:'3px'}}><GoSearch /></button>
+                  <button className="text-muted pt-1" style={{border: 0, backgroundColor: 'transparent', marginLeft: '-35px', paddingBottom:'3px'}}><GoSearch /></button>
                 </Link>
               </div>
             </MDBCol>

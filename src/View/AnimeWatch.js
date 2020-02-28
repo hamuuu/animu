@@ -3,7 +3,7 @@ import AnimePlayer from '../Component/AnimeStream/AnimePlayer';
 import ReactLoading from 'react-loading';
 import SearchBar from '../Component/SearchMenu/SearchBar';
 import EpisodeList from '../Component/List/EpisodeList';
-import NotFoundEpisode from '../Component/NotFoundEpisode';
+import NotFoundEpisode from '../Component/AnimeStream/NotFoundEpisode';
 import axios from 'axios';
 
 class AnimeWatch extends React.Component {
@@ -70,7 +70,7 @@ class AnimeWatch extends React.Component {
     return (
       <div>
         <SearchBar />
-        { this.props.dataEpisode !== null ?
+        { this.state.dataEpisode !== null ?
           <div>
             <div className="container container-player mt-3" style={{padding: 0}}>
               {
@@ -78,7 +78,11 @@ class AnimeWatch extends React.Component {
                 this.state.isLoaded ?
                   this.state.data[0] !== null ?
                     <AnimePlayer title={this.state.data[1].title} data={this.props.match.params} dataEpisode={this.state.data[0]} />
-                    : <NotFoundEpisode />
+                    : <NotFoundEpisode id={this.props.match.params.id}
+                                      uri={this.props.match.params.name}
+                                      name={this.state.data[1].title}
+                                      type={this.props.match.params.type === 'TV' ? 'anime' : this.props.match.params.type}
+                       />
 
                 :
                 <div className="d-flex justify-content-center align-items-center" style={{height:'100px'}}>
@@ -102,7 +106,11 @@ class AnimeWatch extends React.Component {
               }
             </div>
           </div>
-         : <NotFoundEpisode />
+         : <NotFoundEpisode id={this.props.match.params.id}
+                           uri={this.props.match.params.name}
+                           name={this.state.data[1].title}
+                           type={this.props.match.params.type === 'TV' ? 'anime' : this.props.match.params.type}
+            />
         }
       </div>
     );

@@ -4,6 +4,7 @@ import { GoCalendar } from "react-icons/go";
 import LinkAnime from './LinkAnime';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import NavigateEpisode from './NavigateEpisode';
 
 
 class AnimePlayer extends React.Component {
@@ -118,20 +119,7 @@ class AnimePlayer extends React.Component {
           </div>
         </div>
         <div className="row justify-content-center pb-3">
-          <Link to={'/' + this.state.dataEpisode.type + '/' + this.state.dataEpisode.name + '/' + this.state.dataEpisode.id + '/' + (parseInt(this.state.dataEpisode.episode) - 1)}>
-            <div className="p-2 m-2">
-              <button name="prev" className="bg-dark text-light btn" style={{ display: this.props.dataEpisode.episode === '1' ? 'none' : ''}}>
-                « Prev Episode
-              </button>
-            </div>
-          </Link>
-          <Link to={'/' + this.state.dataEpisode.type + '/' + this.state.dataEpisode.name + '/' + this.state.dataEpisode.id + '/' + (parseInt(this.state.dataEpisode.episode) + 1)}>
-            <div className="p-2 m-2">
-              <button name="next" className="bg-dark text-light btn">
-                Next Episode »
-              </button>
-            </div>
-          </Link>
+          <NavigateEpisode dataEpisode = {this.state.dataEpisode} />
         </div>
 
       </div>
